@@ -11,6 +11,36 @@ const i18n = {
     status_on: "Running",
     status_off: "Paused",
     title_settings: "Settings"
+  },
+  "ja": {
+    app_name: "自動整理",
+    status_on: "実行中",
+    status_off: "一時停止",
+    title_settings: "設定"
+  },
+  "ko": {
+    app_name: "자동 정리",
+    status_on: "실행 중",
+    status_off: "일시 중지",
+    title_settings: "설정"
+  },
+  "fr": {
+    app_name: "TidyDownload",
+    status_on: "En cours",
+    status_off: "En pause",
+    title_settings: "Paramètres"
+  },
+  "es": {
+    app_name: "TidyDownload",
+    status_on: "Ejecutando",
+    status_off: "Pausado",
+    title_settings: "Configuración"
+  },
+  "ar": {
+    app_name: "TidyDownload",
+    status_on: "يعمل",
+    status_off: "متوقف",
+    title_settings: "الإعدادات"
   }
 };
 
@@ -61,6 +91,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const t = i18n[lang] || i18n['en']; // 回退到英文
     els.appName.textContent = t.app_name;
     els.btnSettings.title = t.title_settings;
+    
+    // RTL 支持
+    document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
   }
 
   function updateStatusText(enabled, lang) {
