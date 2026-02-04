@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>智能下载管理器</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2>分类</h2>
+      <div class="filter-group">
+        <button class="filter-btn active" data-type="all">
+          <span>🏠</span> 全部文件
+        </button>
+        <button class="filter-btn" data-type="Images">
+          <span>🖼️</span> 图片
+        </button>
+        <button class="filter-btn" data-type="Documents">
+          <span>📄</span> 文档
+        </button>
+        <button class="filter-btn" data-type="Videos">
+          <span>🎬</span> 视频
+        </button>
+        <button class="filter-btn" data-type="Archives">
+          <span>📦</span> 压缩包
+        </button>
+        <button class="filter-btn" data-type="Others">
+          <span>📂</span> 其他
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="header">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" class="search-input" placeholder="搜索文件名或网址...">
+        </div>
+        <div class="stats" style="font-size: 0.9rem; color: var(--text-sub);">
+          今日下载: <span id="todayCount" style="color: var(--primary); font-weight: bold;">0</span>
+        </div>
+      </header>
+
+      <div id="downloadList" class="download-grid">
+        <!-- JS will populate this -->
+      </div>
+    </main>
+  </div>
+  <script src="manager.js"></script>
+</body>
+</html>

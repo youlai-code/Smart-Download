@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { width: 200px; padding: 10px; font-family: sans-serif; text-align: center; }
+    button { 
+      background: #6366f1; color: white; border: none; padding: 10px 15px; 
+      border-radius: 6px; cursor: pointer; width: 100%; font-weight: bold;
+    }
+    button:hover { background: #4f46e5; }
+  </style>
+</head>
+<body>
+  <button id="openBtn">打开管理页</button>
+  <script>
+    document.getElementById('openBtn').addEventListener('click', () => {
+      chrome.tabs.create({ url: 'manager.html' });
+    });
+  </script>
+</body>
+</html>
