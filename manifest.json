@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "智能下载管理器",
+  "name": "TidyDownload - 下载自动归类助手",
   "version": "1.0",
-  "description": "自动按规则分类下载文件。",
+  "description": "Automatically sorts downloaded files into folders (Images, Docs, Apps, etc.). 下载文件自动归档到对应文件夹。",
   "permissions": [
     "downloads",
     "storage"
@@ -11,7 +11,7 @@
     "service_worker": "background.js"
   },
   "action": {
-    "default_title": "智能分类设置",
+    "default_title": "TidyDownload",
     "default_popup": "popup.html"
   },
   "options_page": "options.html",

@@ -24,7 +24,7 @@ const i18n = {
     btn_delete: "删除分类",
     btn_cancel: "取消",
     btn_confirm: "确定",
-    msg_saved: "设置已保存",
+    msg_saved: "规则已保存，下次下载时生效",
     msg_imported: "配置导入成功",
     msg_import_err: "导入失败，格式错误",
     rule_Images: "图片",

@@ -1,13 +1,13 @@
 // 多语言字典
 const i18n = {
   "zh-CN": {
-    app_name: "智能分类",
-    status_on: "运行中",
+    app_name: "下载自动归类",
+    status_on: "正在运行",
     status_off: "已暂停",
     title_settings: "打开设置"
   },
   "en": {
-    app_name: "Smart DL",
+    app_name: "TidyDownload",
     status_on: "Running",
     status_off: "Paused",
     title_settings: "Settings"
