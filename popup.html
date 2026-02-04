@@ -1,94 +1,127 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
   <meta charset="UTF-8">
   <style>
+    /* Reset & Base */
     body {
-      width: 240px;
-      padding: 14px;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      width: 260px; /* 固定宽度，精致小巧 */
+      margin: 0;
+      padding: 16px;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: #f8fafc;
       color: #1e293b;
     }
-    .title {
-      font-weight: 700;
-      margin-bottom: 10px;
+
+    /* Header: Logo + Settings Icon */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
     }
-    .row {
+    
+    .brand {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 10px;
-      padding: 10px 12px;
-      margin-bottom: 12px;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 15px;
+      color: #334155;
     }
-    .status {
-      font-size: 0.9rem;
-    }
-    .btn {
-      background: #6366f1;
-      color: white;
+    .brand-icon { font-size: 18px; }
+
+    /* Settings Icon Button */
+    .btn-icon {
+      background: transparent;
       border: none;
-      padding: 8px 12px;
+      padding: 8px;
       border-radius: 8px;
       cursor: pointer;
-      width: 100%;
-      font-weight: 600;
+      color: #64748b;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .btn:hover {
-      background: #4f46e5;
+    .btn-icon:hover {
+      background-color: #e2e8f0;
+      color: #6366f1; /* Primary Color */
     }
-    .switch {
+    .btn-icon svg { width: 20px; height: 20px; }
+
+    /* Main Control Card */
+    .control-card {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 24px 16px;
+      text-align: center;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Toggle Switch (Larger for Popup) */
+    .switch-container {
       position: relative;
       display: inline-block;
-      width: 42px;
-      height: 22px;
+      width: 60px;
+      height: 34px;
+      margin-bottom: 12px;
     }
-    .switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
+    .switch-container input { opacity: 0; width: 0; height: 0; }
+    
     .slider {
       position: absolute;
       cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      top: 0; left: 0; right: 0; bottom: 0;
       background-color: #cbd5e1;
-      transition: .2s;
-      border-radius: 999px;
+      transition: .3s;
+      border-radius: 34px;
     }
     .slider:before {
       position: absolute;
       content: "";
-      height: 18px;
-      width: 18px;
-      left: 2px;
-      bottom: 2px;
+      height: 26px; width: 26px;
+      left: 4px; bottom: 4px;
       background-color: white;
-      transition: .2s;
-      border-radius: 999px;
+      transition: .3s;
+      border-radius: 50%;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
-    input:checked + .slider {
-      background-color: #22c55e;
+    
+    input:checked + .slider { background-color: #6366f1; }
+    input:checked + .slider:before { transform: translateX(26px); }
+
+    /* Status Text */
+    .status-text {
+      font-size: 14px;
+      font-weight: 600;
+      color: #64748b;
+      transition: color 0.3s;
     }
-    input:checked + .slider:before {
-      transform: translateX(20px);
-    }
+    .status-text.active { color: #10b981; } /* Green when active */
   </style>
 </head>
 <body>
-  <div class="row">
-    <span id="statusText" class="status">智能分类：已开启</span>
-    <label class="switch">
+
+  <div class="header">
+    <div class="brand">
+      <span class="brand-icon">⚡</span>
+      <span data-i18n="app_name">Smart DL</span>
+    </div>
+    <button id="btnSettings" class="btn-icon" title="Settings">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+    </button>
+  </div>
+
+  <div class="control-card">
+    <label class="switch-container">
       <input id="toggle" type="checkbox">
       <span class="slider"></span>
     </label>
+    <div id="statusText" class="status-text" data-i18n="status_on">Enabled</div>
   </div>
-  <button id="openOptions" class="btn">打开设置</button>
+
   <script src="popup.js"></script>
 </body>
 </html>
